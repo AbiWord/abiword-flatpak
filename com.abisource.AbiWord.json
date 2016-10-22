@@ -76,20 +76,47 @@
       ]
     },
     {
-      "name": "abiword",
-      "config-opts": [],
-      "build-options" : {
-        "cflags": "-O2 -g",
-        "cxxflags": "-O2 -g -std=c++11",
-        "env": {
-          "V": "1"
+      "name": "libgpg-error",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.24.tar.bz2",
+          "sha256": "9268e1cc487de5e6e4460fca612a06e4f383072ac43ae90603e5e46783d3e540"
         }
-      },
+      ]
+    },
+    {
+      "name": "libgcrypt",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.7.3.tar.bz2",
+          "sha256": "ddac6111077d0a1612247587be238c5294dd0ee4d76dc7ba783cc55fb0337071"
+        }
+      ]
+    },
+    {
+      "name": "link-grammar",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://www.abisource.com/downloads/link-grammar/5.3.11/link-grammar-5.3.11.tar.gz",
+          "sha256": "73ca3ae82ec7ddbfce827eb7017a2953afea2cea854b4d7517139881e1170cd7"
+        }
+      ]
+    },
+    {
+      "name": "abiword",
+      "config-opts": [ "--enable-plugins=auto" ],
       "sources": [
         {
           "type": "archive",
           "url": "http://www.abisource.com/downloads/abiword/3.0.2/source/abiword-3.0.2.tar.gz",
           "sha256": "afbfd458fd02989d8b0c6362ba8a4c14686d89666f54cfdb5501bd2090cf3522"
+        },
+        {
+          "type": "patch",
+          "path": "patches/nullptr.patch"
         }
       ]
     }
