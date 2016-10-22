@@ -1,0 +1,97 @@
+{
+  "app-id": "com.abisource.AbiWord",
+  "runtime": "org.gnome.Sdk",
+  "runtime-version": "3.20",
+  "sdk": "org.gnome.Sdk",
+  "command": "abiword",
+  "tags": ["stable"],
+  "finish-args": [
+    /* Allow access to developer tools */
+    "--allow=devel",
+    "--talk-name=org.freedesktop.Flatpak",
+    /* X11 + XShm access */
+    "--share=ipc", "--socket=x11",
+    /* Wayland access */
+    "--socket=wayland",
+    /* We want full fs access */
+    "--filesystem=host",
+    /* Needs to talk to the network: */
+    "--share=network",
+    "--talk-name=org.gtk.vfs.*"
+  ],
+  "build-options" : {
+    "cflags": "-O2 -g",
+    "cxxflags": "-O2 -g",
+    "env": {
+      "V": "1"
+    }
+  },
+  "cleanup": ["*.la", "*.a"],
+  "modules": [
+    {
+      "name": "boost",
+      "config-opts": [],
+      "cleanup": [ "/lib/libboost_*.a" ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://downloads.sourceforge.net/project/boost/boost/1.60.0/boost_1_60_0.tar.bz2",
+          "sha256": "686affff989ac2488f79a97b9479efb9f2abae035b5ed4d8226de6857933fd3b"
+        },
+        {
+          "type": "file",
+          "path": "boost-configure",
+          "dest-filename": "configure"
+        }
+      ]
+    },
+    {
+      "name": "fribidi",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://fribidi.org/download/fribidi-0.19.7.tar.bz2",
+          "sha256": "08222a6212bbc2276a2d55c3bf370109ae4a35b689acbc66571ad2a670595a8e"
+        }
+      ]
+    },
+    {
+      "name": "gsf",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.gnome.org/core/3.20/3.20.2/sources/libgsf-1.14.36.tar.xz",
+          "sha256": "71b7507f86c0f7c341bb362bdc7925a2ae286729be0bf5b8fd9581ffbbd62940"
+        }
+      ]
+    },
+    {
+      "name": "wv",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://www.abisource.com/downloads/wv/1.2.9/wv-1.2.9.tar.gz",
+          "sha256": "4c730d3b325c0785450dd3a043eeb53e1518598c4f41f155558385dd2635c19d"
+        }
+      ]
+    },
+    {
+      "name": "abiword",
+      "config-opts": [],
+      "build-options" : {
+        "cflags": "-O2 -g",
+        "cxxflags": "-O2 -g -std=c++11",
+        "env": {
+          "V": "1"
+        }
+      },
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://www.abisource.com/downloads/abiword/3.0.2/source/abiword-3.0.2.tar.gz",
+          "sha256": "afbfd458fd02989d8b0c6362ba8a4c14686d89666f54cfdb5501bd2090cf3522"
+        }
+      ]
+    }
+  ]
+}
