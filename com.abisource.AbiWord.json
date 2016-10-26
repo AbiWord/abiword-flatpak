@@ -1,5 +1,6 @@
 {
   "app-id": "com.abisource.AbiWord",
+  "branch": "3.0",
   "runtime": "org.gnome.Sdk",
   "runtime-version": "3.20",
   "sdk": "org.gnome.Sdk",
@@ -30,7 +31,7 @@
   "modules": [
     {
       "name": "boost",
-      "config-opts": [],
+      "config-opts": [ "--with-toolset=gcc", "--with-icu" ],
       "cleanup": [ "/lib/libboost_*.a" ],
       "sources": [
         {
@@ -82,26 +83,6 @@
           "type": "archive",
           "url": "http://www.abisource.com/downloads/wv/1.2.9/wv-1.2.9.tar.gz",
           "sha256": "4c730d3b325c0785450dd3a043eeb53e1518598c4f41f155558385dd2635c19d"
-        }
-      ]
-    },
-    {
-      "name": "libgpg-error",
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.24.tar.bz2",
-          "sha256": "9268e1cc487de5e6e4460fca612a06e4f383072ac43ae90603e5e46783d3e540"
-        }
-      ]
-    },
-    {
-      "name": "libgcrypt",
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.7.3.tar.bz2",
-          "sha256": "ddac6111077d0a1612247587be238c5294dd0ee4d76dc7ba783cc55fb0337071"
         }
       ]
     },
@@ -210,6 +191,16 @@
       ]
     },
     {
+      "name": "libwps",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://heanet.dl.sourceforge.net/project/libwps/libwps/libwps-0.2.10/libwps-0.2.10.tar.xz",
+          "sha256": "2d9771489d2474d483089174e50f57f35785d0a444d390b0dfc7eae1b42b4b12"
+        }
+      ]
+    },
+    {
       "name": "abiword",
       "config-opts": [ "--enable-plugins=auto" ],
       "sources": [
@@ -221,6 +212,14 @@
         {
           "type": "patch",
           "path": "patches/nullptr.patch"
+        },
+        {
+          "type": "patch",
+          "path": "patches/gcrypt-pkg-config.diff"
+        },
+        {
+          "type": "shell",
+          "commands": [ "autoreconf -si" ]
         }
       ]
     }

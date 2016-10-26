@@ -1,0 +1,25 @@
+diff --git a/configure.ac b/configure.ac
+index dd32195..c9b35d4 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -910,14 +910,14 @@ AM_CONDITIONAL(DEBUG, test "$abi_cv_debug" = "yes")
+ #
+ # Optional dependencies handling
+ #
+-AM_PATH_LIBGCRYPT( 1.4.5,
+-		   [
++PKG_CHECK_MODULES([LIBGCRYPT], libgcrypt >= $GCRYPT_VERSION,
++[
++		   abi_cv_gcrypt=yes
++],
++[
+ 		   abi_cv_gcrypt=no
+  		   AC_DEFINE([HAVE_GCRYPT], [1], [Use gcrypt for the cryptos])
+-		   ],
+-		   [
+-		   abi_cv_gcrypt=yes
+-		   ] )
++])
+ AM_CONDITIONAL(HAVE_GCRYPT, test "$abi_cv_gcrypt" = "yes")
+ 
+ if test "$abi_cv_gio" = "yes"; then
