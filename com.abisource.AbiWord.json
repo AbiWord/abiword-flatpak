@@ -1,14 +1,21 @@
 {
   "app-id": "com.abisource.AbiWord",
   "branch": "3.0",
-  "runtime": "org.gnome.Sdk",
+  "runtime": "org.gnome.Platform",
   "runtime-version": "3.20",
   "sdk": "org.gnome.Sdk",
   "command": "abiword",
+  "copy-icon": true,
+  "rename-icon": "abiword",
+  "rename-desktop-file": "abiword.desktop",
+  "rename-appdata-file": "abiword.appdata.xml",
   "tags": ["stable"],
   "finish-args": [
     /* Allow access to developer tools */
     "--allow=devel",
+    /* dconf */
+    "--filesystem=xdg-run/dconf", "--filesystem=~/.config/dconf:ro",
+    "--talk-name=ca.desrt.dconf", "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
     "--talk-name=org.freedesktop.Flatpak",
     /* X11 + XShm access */
     "--share=ipc", "--socket=x11",
@@ -71,7 +78,7 @@
       "sources": [
         {
           "type": "archive",
-          "url": "http://heanet.dl.sourceforge.net/project/wvware/libwmf/0.2.8.4/libwmf-0.2.8.4.tar.gz",
+          "url": "https://downloads.sourceforge.net/project/wvware/libwmf/0.2.8.4/libwmf-0.2.8.4.tar.gz",
           "sha256": "5b345c69220545d003ad52bfd035d5d6f4f075e65204114a9e875e84895a7cf8"
         }
       ]
@@ -195,7 +202,7 @@
       "sources": [
         {
           "type": "archive",
-          "url": "http://heanet.dl.sourceforge.net/project/libwps/libwps/libwps-0.2.10/libwps-0.2.10.tar.xz",
+          "url": "https://downloads.sourceforge.net/project/libwps/libwps/libwps-0.2.10/libwps-0.2.10.tar.xz",
           "sha256": "2d9771489d2474d483089174e50f57f35785d0a444d390b0dfc7eae1b42b4b12"
         }
       ]
@@ -216,6 +223,10 @@
         {
           "type": "patch",
           "path": "patches/gcrypt-pkg-config.diff"
+        },
+        {
+          "type": "patch",
+          "path": "patches/0001-Bug-13672-Add-AppData-file.patch"
         },
         {
           "type": "shell",

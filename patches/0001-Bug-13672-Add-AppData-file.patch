@@ -1,0 +1,74 @@
+From f9d4fbaaff8fe8ba4d29ab33d05299c1f4c057e5 Mon Sep 17 00:00:00 2001
+From: Hubert Figuiere <hub@figuiere.net>
+Date: Tue, 26 Apr 2016 01:08:57 +0000
+Subject: [PATCH] Bug 13672 - Add AppData file.
+
+git-svn-id: svn+ssh://svn.abisource.com/svnroot/abiword/trunk@35236 bcba8976-2d24-0410-9c9c-aab3bd5fdfd6
+---
+ Makefile.am         |  5 +++++
+ abiword.appdata.xml | 26 ++++++++++++++++++++++++++
+ 2 files changed, 31 insertions(+)
+ create mode 100644 abiword.appdata.xml
+
+diff --git a/Makefile.am b/Makefile.am
+index a4edce277..d18ee70b3 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -13,10 +13,14 @@ desktop_DATA = abiword.desktop
+ mimedir = @ABIWORD_DATADIR@/mime-info
+ mime_DATA = abiword.keys
+ 
++appdatadir = $(datarootdir)/appdata
++appdata_DATA = abiword.appdata.xml
++
+ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = abiword-$(ABIWORD_SERIES).pc
+ 
+ dist_man1_MANS = abiword.1
++
+ endif
+ 
+ if TOOLKIT_GTK
+@@ -39,6 +43,7 @@ EXTRA_DIST = \
+ 	README \
+ 	ChangeLog \
+ 	abiword.desktop \
++	$(appdata_DATA) \
+ 	abiword.keys \
+ 	abiword.png \
+ 	libabiword.pc.in \
+diff --git a/abiword.appdata.xml b/abiword.appdata.xml
+new file mode 100644
+index 000000000..9c73870a8
+--- /dev/null
++++ b/abiword.appdata.xml
+@@ -0,0 +1,26 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!-- Copyright 2014 Richard Hughes <richard@hughsie.com> -->
++<application>
++  <id type="desktop">abiword.desktop</id>
++  <name>AbiWord</name>
++  <summary>A word processor</summary>
++  <metadata_license>CC0-1.0</metadata_license>
++  <description>
++    <p>
++      AbiWord is a free word processing program. It is suitable for a
++      wide variety of word processing tasks but remain focused on word
++      processing.
++    </p>
++    <p>
++      AbiWord is meant to remain relatively lightweight and support
++      many file formats.
++    </p>
++    <!-- FIXME: Probably needs another paragraph -->
++  </description>
++  <url type="homepage">http://www.abisource.com/</url>
++  <screenshots>
++  <!-- FIXME: Needs an official up to date screenshot -->
++    <screenshot type="default">http://www.abisource.com/screenshots/AbiWord-2.0-Gnome.png</screenshot>
++  </screenshots>
++  <updatecontact>hub@figuiere.net</updatecontact>
++</application>
+-- 
+2.11.0
+
