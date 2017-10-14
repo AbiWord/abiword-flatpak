@@ -1,0 +1,4 @@
+.flatpak-builder/
+app/
+repo/
+abiword/
